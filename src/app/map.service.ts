@@ -10,6 +10,12 @@ import { catchError, retry } from 'rxjs/operators'
 })
 export class MapService {
 
+    dbUrl: string = 'http://localhost:3000/db'
+
     constructor(private http: HttpClient) { }
+
+    getAllStates() {
+        return this.http.get(this.dbUrl);
+    }
 
 }

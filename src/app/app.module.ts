@@ -9,22 +9,27 @@ import { MapComponent } from './map/map.component';
 import { MapService } from './map.service';
 import { StateService } from './state.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        StateComponent,
-        MapComponent
-    ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        DragDropModule
-    ],
-    providers: [MapService, StateService],
-    bootstrap: [
-        AppComponent
-    ]
+   declarations: [
+      AppComponent,
+      StateComponent,
+      MapComponent,
+      SafePipe
+   ],
+   imports: [
+      BrowserModule,
+      HttpClientModule,
+      BrowserAnimationsModule,
+      DragDropModule
+   ],
+   providers: [
+      MapService,
+      StateService
+   ],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }

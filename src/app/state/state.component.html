@@ -1,3 +1,2 @@
-<p>{{initial}}</p>
-<p>{{squareSVG}}</p>
-<p>{{cssPolygons}}</p>
+<div title={{name}} *ngFor="let clipPath of cssPolygons" class="stateClipPath"
+    [style.clip-path]="clipPath | safe: 'style'"></div>

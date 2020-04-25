@@ -1,16 +1,23 @@
-.interact {
+:host {
     position: absolute;
     width: 100vw;
     height: 100vh;
     overflow: visible;
-    background: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:host app-state {
+    position: absolute;
+    margin: 0;
+    display: block;
+    height: 593px;
+    width: 959px;
 }
 
 .map {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
