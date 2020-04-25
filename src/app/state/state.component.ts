@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MapService } from '../map.service';
+import { StateService } from '../state.service';
 
 @Component({
     selector: 'app-state',
@@ -13,10 +13,10 @@ export class StateComponent implements OnInit {
     squareSVG: string;
     cssPolygons: string[];
 
-    constructor(private mapService: MapService) { }
+    constructor(private stateService: StateService) { }
 
     ngOnInit() {
-        this.mapService.getStatePaths(this.name)
+        this.stateService.getPaths(this.name)
             .subscribe(data => {
                 this.initial = data[0];
                 this.squareSVG = data[1]['squareSVG'];
