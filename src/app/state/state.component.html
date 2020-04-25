@@ -1,2 +1,3 @@
 <div title={{name}} *ngFor="let clipPath of cssPolygons" class="stateClipPath"
-    [style.clip-path]="clipPath | safe: 'style'"></div>
+    [style.clip-path]="clipPath | safe: 'style'" (click)="select()" [ngStyle]="stateStyle">
+</div>

@@ -10,7 +10,7 @@ import { catchError, retry } from 'rxjs/operators'
 })
 export class MapService {
 
-    dbUrl: string = 'http://localhost:3000/db'
+    dbUrl: string = 'http://localhost:3000/db';
 
     constructor(private http: HttpClient) { }
 

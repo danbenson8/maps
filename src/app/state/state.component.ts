@@ -13,12 +13,11 @@ export class StateComponent implements OnInit {
     squareSVG: string;
     cssPolygons: string[];
 
-    stateStyle: any = {
-        'background-color': 'orange'
+    selected: boolean = false;
+    stateStyle: object = {
+        'background-color': 'white',
+        'transform': 'scale(1)',
     }
-
-    _polygon: string = 'polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)';
-    color: string = 'white';
 
     constructor(private stateService: StateService) { }
 
@@ -31,6 +30,15 @@ export class StateComponent implements OnInit {
                 this.cssPolygons = data[1]['cssPolygons'].map(el => `polygon(${el})`
                 );
             });
+    }
+
+    select(): void {
+        this.selected = (this.selected) ? false : true;
+        this.toggleHighlight();
+    }
+
+    toggleHighlight(): void {
+        this.stateStyle['background-color'] = (this.selected) ? 'blue' : 'white';
     }
 
 }

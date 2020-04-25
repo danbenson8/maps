@@ -1,4 +1,3 @@
-<div id="interact" class="interact" cdkDrag [cdkDragDisabled]="dragDisabled" (wheel)="wheel($event)"
-    [ngStyle]="interactStyle">
-    <app-state *ngFor="let state of states" name="{{state}}"></app-state>
+<div id="interact" class="interact">
+    <app-state *ngFor="let state of states" name="{{state.name}}"></app-state>
 </div>

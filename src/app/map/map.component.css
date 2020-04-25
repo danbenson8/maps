@@ -1,15 +1,9 @@
-:host {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    overflow: visible;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .interact {
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    position: absolute;
+    width: 959px;
+    height: 593px;
+    overflow: visible;
+    display: block;
+    transform: scale(1.2);
 }
