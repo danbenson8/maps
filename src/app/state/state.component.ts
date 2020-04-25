@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { StateService } from '../state.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-state',
@@ -13,7 +14,7 @@ export class StateComponent implements OnInit {
     squareSVG: string;
     cssPolygons: string[];
 
-    selected: boolean = false;
+    highlighted: boolean = false;
     stateStyle: object = {
         'background-color': 'white',
         'transform': 'scale(1)',
@@ -33,12 +34,7 @@ export class StateComponent implements OnInit {
     }
 
     select(): void {
-        this.selected = (this.selected) ? false : true;
-        this.toggleHighlight();
+        this.highlighted = !this.highlighted;
+        this.stateStyle['background-color'] = (this.highlighted) ? 'blue' : 'white';
     }
-
-    toggleHighlight(): void {
-        this.stateStyle['background-color'] = (this.selected) ? 'blue' : 'white';
-    }
-
 }

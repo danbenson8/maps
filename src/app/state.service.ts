@@ -14,15 +14,10 @@ export class StateService {
 
     baseUrl: string = 'http://localhost:3000/'
     currentUrl: string;
-    selectedStates: object;
 
     getPaths(state: string): Observable<object> {
         this.currentUrl = this.baseUrl + state;
         return this.http.get(this.currentUrl);
-    }
-
-    setSelected(state: string) {
-        this.selectedStates[state] = true;
     }
 
 }

@@ -1,8 +1,14 @@
 import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { MapService } from '../map.service';
 
-class state {
-    constructor(private name: string) {
+class State {
+    id: string;
+    selected: boolean;
+    constructor(id: string) {
+        this.id = id;
+        this.selected = false;
+    }
+    [Symbol.iterator]() {
 
     }
 }
@@ -13,13 +19,22 @@ class state {
 })
 export class MapComponent implements OnInit {
 
-    states: state[] = [];
+    newStates = new Map();
 
     constructor(private mapService: MapService) { }
 
     ngOnInit() {
         // TODO error handling
         this.mapService.getAllStates()
-            .subscribe(data => this.states = Object.keys(data).map(el => new state(el)));
+            .subscribe(data => {
+                Object.keys(data).forEach(el => {
+                    this.newStates.set(el, new State(data[el][0]));
+                });
+            });
+    }
+
+    select(event: MouseEvent) {
+        let state = event.target['title'];
+        if (this.newStates.has(state)) { this.newStates.get(state).selected = !this.newStates.get(state).selected; }
     }
 }
