@@ -1,3 +1,17 @@
-<p>
-  map works!
-</p>
+<div id="interact" class="interact" cdkDrag [cdkDragDisabled]="dragDisabled" (wheel)="wheel($event)"
+    [ngStyle]="divStyle">
+    <div id="map" class="map" [ngStyle]="mapStyle">
+        <!-- <div title="alaska" class="alaska">
+        <div [ngStyle]="stateStyle" class="AK1"></div>
+        <div [ngStyle]="stateStyle" class="AK2"></div>
+        <div [ngStyle]="stateStyle" class="AK3"></div>
+        <div [ngStyle]="stateStyle" class="AK4"></div>
+        <div [ngStyle]="stateStyle" class="AK5"></div>
+        <div [ngStyle]="stateStyle" class="AK6"></div>
+        <div [ngStyle]="stateStyle" class="AK7"></div>
+        <div [ngStyle]="stateStyle" class="AK8"></div>
+        <div [ngStyle]="stateStyle" class="AK9"></div>
+        <div [ngStyle]="stateStyle" class="AK10"></div>
+      </div>   -->
+    </div>
+</div>

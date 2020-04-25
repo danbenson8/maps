@@ -21,9 +21,7 @@ export class StateComponent implements OnInit {
                 this.initial = data[0];
                 this.squareSVG = data[1]['squareSVG'];
                 this.cssPolygons = data[1]['cssPolygons'];
-            })
+            });
     }
-
-
 
 }
