@@ -10,13 +10,15 @@ import { MapService } from './map.service';
 import { StateService } from './state.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SafePipe } from './safe.pipe';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       StateComponent,
       MapComponent,
-      SafePipe
+      SafePipe,
+      SidebarComponent
    ],
    imports: [
       BrowserModule,
