@@ -12,12 +12,12 @@ export class MapService {
 
     constructor(private http: HttpClient) { }
 
-    dbUrl: string = 'http://localhost:3000/';
-    stateUrl: string;
+    baseUrl: string = 'http://localhost:3000/'
+    currentStateUrl: string;
 
     getStatePaths(state: string) {
-        this.stateUrl = this.dbUrl + state;
-        return this.http.get(this.stateUrl);
+        this.currentStateUrl = this.baseUrl + state;
+        return this.http.get(this.currentStateUrl);
     }
 
 }
