@@ -1,3 +1,26 @@
+:root {
+    --light-greenish-blue: #55efc4;
+    --mint-leaf: #00b894;
+    --faded-poster: #81ecec;
+    --robins-egg-blue: #00cec9;
+    --green-darner-tail: #74b9ff;
+    --electron-blue: #0984e3;
+    --shy-moment: #a29bfe;
+    --exodus-fruit: #6c5ce7;
+    --sour-lemon: #ffeaa7;
+    --bright-yarrow: #fdcb6e;
+    --first-date: #fab1a0;
+    --orangeville: #e17055;
+    --pink-glamour: #ff7675;
+    --chi-gong: #d63031;
+    --pic0-8-pink: #fd79a8;
+    --prunus-avium: #e84393;
+    --city-lights: #dfe6e9;
+    --soothing-breeze: #b2bec3;
+    --american-river: #636e72;
+    --dracula-orchid: #2d3436;
+}
+
 * {
     overflow: hidden;
     margin: 0;
