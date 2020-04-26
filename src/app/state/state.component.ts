@@ -35,6 +35,6 @@ export class StateComponent implements OnInit {
 
     select(): void {
         this.highlighted = !this.highlighted;
-        this.stateStyle['background-color'] = (this.highlighted) ? 'blue' : 'var(--city-lights)';
+        this.stateStyle['background-color'] = (this.highlighted) ? 'var(--electron-blue)' : 'var(--city-lights)';
     }
 }
