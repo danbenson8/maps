@@ -7,3 +7,10 @@ app-map {
     align-items: center;
     justify-content: center;
 }
+
+app-sidebar {
+    position: absolute;
+    width: 15vw;
+    height: 100vh;
+    background-color: var(--american-river);
+}
