@@ -1,1 +1,1 @@
-<app-state *ngFor="let state of newStates | keyvalue" name="{{state.key}}" (click)="select($event)"></app-state>
+<app-state *ngFor="let state of states | keyvalue" name="{{state.value.name}}" (click)="select($event)"></app-state>
