@@ -1,9 +1,0 @@
-app-map {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    overflow: visible;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}

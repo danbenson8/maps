@@ -1,3 +1,12 @@
-<p>
-  sidebar works!
-</p>
+<mat-sidenav-container class="example-container" (backdropClick)="close()">
+    <mat-sidenav #sidenav mode="over" (keydown.escape)="close()" disableClose>
+        <p>some stuff...</p>
+    </mat-sidenav>
+
+    <mat-sidenav-content (keydown.escape)="sidenav.open()">
+        <button mat-icon-button (click)="sidenav.open()">menu</button>
+        <div class="map">
+            <app-map></app-map>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

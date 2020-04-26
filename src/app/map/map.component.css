@@ -1,5 +1,4 @@
-.interact {
-    position: absolute;
+:host {
     position: absolute;
     width: 959px;
     height: 593px;

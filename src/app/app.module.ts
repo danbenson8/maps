@@ -11,27 +11,33 @@ import { StateService } from './state.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SafePipe } from './safe.pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      StateComponent,
-      MapComponent,
-      SafePipe,
-      SidebarComponent
-   ],
-   imports: [
-      BrowserModule,
-      HttpClientModule,
-      BrowserAnimationsModule,
-      DragDropModule
-   ],
-   providers: [
-      MapService,
-      StateService
-   ],
-   bootstrap: [
-      AppComponent
-   ]
+    declarations: [
+        AppComponent,
+        StateComponent,
+        MapComponent,
+        SafePipe,
+        SidebarComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        DragDropModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+    ],
+    providers: [
+        MapService,
+        StateService
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule { }
