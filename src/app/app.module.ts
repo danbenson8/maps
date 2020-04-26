@@ -14,6 +14,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
         MatSidenavModule,
         MatButtonModule,
         MatIconModule,
+        MatExpansionModule,
     ],
     providers: [
         MapService,
