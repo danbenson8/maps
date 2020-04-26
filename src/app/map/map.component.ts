@@ -67,27 +67,31 @@ export class MapComponent implements OnInit {
                 alert("couldn't get map data! :(");
                 console.log(`mapService error: ${error}`)
             },
-            () => {
-                this.covidService.getCurrent().subscribe(
-                    payload => {
-                        Object.values(payload).forEach((state: object) => {
-                            try {
-                                let stateName: string = this.states.get(state['state']).name;
-                                let statePayload = new apiData(...Object.values(state));
-                                this.states.set(state['state'], new State(stateName, false, statePayload));
-                            } catch (error) {
-                                // TODO move this to a logger
-                                console.log(`catch error: ${error}`, state['state']);
-                            }
-                        });
-                    },
-                    error => {
-                        alert("couldn't get state COVID data! :(");
-                        console.log(`covideService error: ${error}`)
-                    },
-                    () => console.log(this.states)
-                );
-            });
+            () => this.getCOVID('now'));
+    }
+
+    getCOVID(timeFrame: string | string[]) {
+        if (timeFrame == 'now') {
+            this.covidService.getCurrent().subscribe(
+                payload => {
+                    Object.values(payload).forEach((state: object) => {
+                        try {
+                            let stateName: string = this.states.get(state['state']).name;
+                            let statePayload = new apiData(...Object.values(state));
+                            this.states.set(state['state'], new State(stateName, false, statePayload));
+                        } catch (error) {
+                            // TODO move this to a logger
+                            console.log(`catch error: ${error}`, state['state']);
+                        }
+                    });
+                },
+                error => {
+                    alert("couldn't get state COVID data! :(");
+                    console.log(`covideService error: ${error}`)
+                },
+                () => console.log(this.states)
+            );
+        }
     }
 
     select(event: MouseEvent) {
