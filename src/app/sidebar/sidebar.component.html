@@ -1,6 +1,15 @@
 <mat-sidenav-container class="example-container" (backdropClick)="close()">
     <mat-sidenav #sidenav mode="over" (keydown.escape)="close()" disableClose>
-        <p>some stuff...</p>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    TITLE
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <p>CONTENT</p>
+
+        </mat-expansion-panel>
     </mat-sidenav>
 
     <mat-sidenav-content (keydown.escape)="sidenav.open()">
