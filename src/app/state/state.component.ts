@@ -16,7 +16,7 @@ export class StateComponent implements OnInit {
 
     highlighted: boolean = false;
     stateStyle: object = {
-        'background-color': 'white',
+        'background-color': 'var(--city-lights)',
         'transform': 'scale(1)',
     }
 
@@ -35,6 +35,6 @@ export class StateComponent implements OnInit {
 
     select(): void {
         this.highlighted = !this.highlighted;
-        this.stateStyle['background-color'] = (this.highlighted) ? 'blue' : 'white';
+        this.stateStyle['background-color'] = (this.highlighted) ? 'blue' : 'var(--city-lights)';
     }
 }
