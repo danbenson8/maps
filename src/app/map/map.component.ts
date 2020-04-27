@@ -3,49 +3,9 @@ import { MapService } from '../services/map.service';
 import { CovidService } from '../services/covid.service';
 import { LoggerService } from '../services/logger.service';
 import { ColorService } from '../services/color.service';
+import { ApiData } from '../classes/apiData';
+import { State } from '../classes/State';
 
-class apiData {
-    constructor(
-        private state?: string,
-        private positive?: number,
-        private positiveScore?: number,
-        private negativeScore?: number,
-        private negativeRegularScore?: number,
-        private commercialScore?: number,
-        private grade?: string,
-        private score?: number,
-        private notes?: string,
-        private dataQualityGrade?: string,
-        private negative?: number,
-        private pending?: any,
-        private hospitalizedCurrently?: number,
-        private hospitalizedCumulative?: any,
-        private inIcuCurrently?: any,
-        private inIcuCumulative?: any,
-        private onVentilatorCurrently?: any,
-        private onVentilatorCumulative?: any,
-        private recovered?: number,
-        private lastUpdateEt?: string,
-        private checkTimeEt?: string,
-        private death?: number,
-        private hospitalized?: any,
-        private total?: number,
-        private totalTestResults?: number,
-        private posNeg?: number,
-        private fips?: string,
-        private dateModified?: string,
-        private dateChecked?: string,
-        private hash?: string,
-    ) { }
-}
-class State {
-    constructor(
-        private name: string,
-        private selected: boolean = false,
-        // TODO convert to map... datE -> datA
-        private data?: apiData,
-    ) { }
-}
 @Component({
     selector: 'app-map',
     templateUrl: './map.component.html',
@@ -83,14 +43,14 @@ export class MapComponent implements OnInit {
                 payload => {
                     Object.values(payload).forEach((state: object) => {
                         let stateName: string;
-                        let statePayload: apiData;
+                        let statePayload: ApiData;
                         try {
                             stateName = this.states.get(state['state']).name;
                         } catch (error) {
                             this.logger.log('ignore', error, `state: ${state['state']} not available`);
                         }
                         if (stateName) {
-                            statePayload = new apiData(...Object.values(state));
+                            statePayload = new ApiData(...Object.values(state));
                             this.updateState(state['state'], new State(stateName, false, statePayload));
                         }
                     });
