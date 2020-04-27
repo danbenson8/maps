@@ -70,7 +70,7 @@ export class MapComponent implements OnInit {
             () => this.getCOVID('now'));
     }
 
-    getCOVID(timeFrame: string | string[]) {
+    getCOVID(timeFrame: string | string[]): void {
         if (timeFrame == 'now') {
             this.covidService.getCurrent().subscribe(
                 payload => {
@@ -78,10 +78,9 @@ export class MapComponent implements OnInit {
                         try {
                             let stateName: string = this.states.get(state['state']).name;
                             let statePayload = new apiData(...Object.values(state));
-                            this.states.set(state['state'], new State(stateName, false, statePayload));
+                            this.updateState(state['state'], new State(stateName, false, statePayload))
                         } catch (error) {
-                            // TODO move this to a logger
-                            console.log(`catch error: ${error}`, state['state']);
+                            this.logger(`catch error: ${error}`, this.getCOVID)
                         }
                     });
                 },
@@ -89,13 +88,62 @@ export class MapComponent implements OnInit {
                     alert("couldn't get state COVID data! :(");
                     console.log(`covideService error: ${error}`)
                 },
-                () => console.log(this.states)
+                () => this.displayCOVID('now')
             );
         }
+    }
+
+    updateState(state: string, info: any, logError: boolean = false): boolean {
+        try {
+            this.states.set(state['state'], info);
+            return true;
+        } catch (error) {
+            if (logError) {
+                this.logger(`error updating state: ${state} w/ info: ${info}`, this.updateState, [state])
+            }
+            return false;
+        }
+    }
+
+    logger(message: string, where: Function, parameters?: any[]) {
+        // TODO add a message log
+        console.log(`${where.name}${(parameters) ? ` w/ parameters: ${parameters}` : ''}: ${message}`);
     }
 
     select(event: MouseEvent) {
         let state = event.target['title'];
         if (this.states.has(state)) { this.states.get(state).selected = !this.states.get(state).selected; }
+    }
+
+    displayCOVID(timeFrame: string | string[], status?: string): void {
+        let color: string;
+        switch (status) {
+            case 'positive': {
+                color = 'var(--bright-yellow)';
+                break;
+            }
+            case 'negative': {
+                color = 'var(--electron-blue)';
+                break;
+            }
+            case 'recovered': {
+                color = 'var(--mint-leaf)';
+                break;
+            }
+            case 'death': {
+                color = 'var(--chi-gong)';
+                break;
+            }
+            default: {
+                color = 'var(--chi-gong)';
+                break;
+            }
+
+        }
+
+        if (timeFrame == 'now') {
+            console.log(color);
+        }
+
     }
 }
