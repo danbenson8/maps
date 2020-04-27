@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { MapService } from '../map.service';
 import { CovidService } from '../covid.service';
+import { LoggerService } from '../logger.service';
 
 class apiData {
     constructor(
@@ -53,7 +54,9 @@ export class MapComponent implements OnInit {
 
     states = new Map();
 
-    constructor(private mapService: MapService, private covidService: CovidService) { }
+    constructor(private mapService: MapService,
+        private covidService: CovidService,
+        private logger: LoggerService) { }
 
     ngOnInit() {
         this.getAllStates();
@@ -67,7 +70,7 @@ export class MapComponent implements OnInit {
                 })
             },
             error => {
-                this.logger('error', "couldn't get maps!", this.getAllStates)
+                this.logger.log('error', error)
             },
             () => this.getCOVID('now'));
     }
@@ -82,7 +85,7 @@ export class MapComponent implements OnInit {
                         try {
                             stateName = this.states.get(state['state']).name;
                         } catch (error) {
-                            this.logger('ignore', `state: ${state['state']} not available`, this.getCOVID, ['now']);
+                            this.logger.log('ignore', error, `state: ${state['state']} not available`);
                         }
                         if (stateName) {
                             statePayload = new apiData(...Object.values(state));
@@ -91,8 +94,7 @@ export class MapComponent implements OnInit {
                     });
                 },
                 error => {
-                    alert("couldn't get state COVID data! :(");
-                    console.log(`covideService error: ${error}`)
+                    this.logger.log('error', error, "couldn't reach api :(")
                 },
                 () => this.displayCOVID('now')
             );
@@ -105,31 +107,9 @@ export class MapComponent implements OnInit {
             return true;
         } catch (error) {
             if (logError) {
-                this.logger('error', `error updating state: ${state} w/ info: ${info}`, this.updateState, [state])
+                this.logger.log('error', error, `error updating state: ${state} w/ info: ${info}`)
             }
             return false;
-        }
-    }
-
-    logger(type: string, message: string, where?: Function, parameters?: any[]) {
-        // TODO add a message log
-        switch (type) {
-            case 'error': {
-                console.log(`${where.name}${(parameters) ? `(${parameters})` : ''}: ${message}`);
-                break;
-            }
-            case 'request': {
-                break;
-            }
-            case 'log': {
-                break;
-            }
-            case 'ignore': {
-                break;
-            }
-            default: {
-                break;
-            }
         }
     }
 
