@@ -3,14 +3,13 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators'
-import { MapService } from './map.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class StateService {
 
-    constructor(private http: HttpClient, private mapService: MapService) { }
+    constructor(private http: HttpClient) { }
 
     baseUrl: string = 'http://localhost:3000/'
     currentUrl: string;
