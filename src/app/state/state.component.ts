@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { StateService } from '../services/state.service';
-import { Observable } from 'rxjs';
+import { State } from '../classes/State'
+import { LoggerService } from '../services/logger.service';
 
 @Component({
     selector: 'app-state',
@@ -20,7 +21,7 @@ export class StateComponent implements OnInit {
         'transform': 'scale(1)',
     }
 
-    constructor(private stateService: StateService) { }
+    constructor(private stateService: StateService, private logger: LoggerService) { }
 
     ngOnInit() {
         // TODO errorhandling
@@ -30,7 +31,10 @@ export class StateComponent implements OnInit {
                 this.squareSVG = data[1]['squareSVG'];
                 this.cssPolygons = data[1]['cssPolygons'].map(el => `polygon(${el})`
                 );
-            });
+            },
+                (error) => {
+                    this.logger.log('error', error, 'StateComponent @ngOnInit')
+                });
     }
 
     select(): void {
