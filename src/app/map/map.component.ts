@@ -5,6 +5,7 @@ import { LoggerService } from '../services/logger.service';
 import { ColorService } from '../services/color.service';
 import { ApiData } from '../classes/apiData';
 import { State } from '../classes/State';
+import { StateService } from '../services/state.service';
 
 @Component({
     selector: 'app-map',
@@ -15,7 +16,9 @@ export class MapComponent implements OnInit {
 
     states: Map<any, State> = new Map();
 
-    constructor(private mapService: MapService,
+    constructor(
+        private stateService: StateService,
+        private mapService: MapService,
         private covidService: CovidService,
         private logger: LoggerService,
         private color: ColorService) { }
@@ -27,8 +30,10 @@ export class MapComponent implements OnInit {
     getAllStates() {
         this.mapService.getAllStates().subscribe(
             payload => {
+                let data: object;
                 Object.keys(payload).forEach(el => {
-                    this.states.set(payload[el][0], new State(el));
+                    data = payload[el];
+                    this.states.set(data[0], new State(el, data[0], data[1]['squareSVG'], data[1]['cssPolygons']));
                 })
             },
             error => {
@@ -42,16 +47,13 @@ export class MapComponent implements OnInit {
             this.covidService.getCurrent().subscribe(
                 payload => {
                     Object.values(payload).forEach((state: object) => {
-                        let stateName: string;
-                        let statePayload: ApiData;
                         try {
-                            stateName = this.states.get(state['state']).name;
+                            let statePayload: ApiData = new ApiData(...Object.values(state));
+                            let cur: State = this.states.get(state['state'])
+                            cur.data = statePayload;
+                            this.updateState(state['state'], cur);
                         } catch (error) {
                             this.logger.log('ignore', error, `state: ${state['state']} not available`);
-                        }
-                        if (stateName) {
-                            statePayload = new ApiData(...Object.values(state));
-                            this.updateState(state['state'], new State(stateName, false, statePayload));
                         }
                     });
                 },
@@ -92,6 +94,9 @@ export class MapComponent implements OnInit {
             colorByState = this.color.proportionOfTotal(valueByState, 'recovered');
         }
         // TODO push color to background-color of state
-        console.log(colorByState);
+        //console.log(colorByState);
+        for (let state of this.states) {
+            console.log(state);
+        }
     }
 }

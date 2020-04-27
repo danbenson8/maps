@@ -11,6 +11,7 @@ import { LoggerService } from '../services/logger.service';
 export class StateComponent implements OnInit {
 
     @Input() name: string;
+
     initial: string;
     squareSVG: string;
     cssPolygons: string[];
@@ -25,16 +26,16 @@ export class StateComponent implements OnInit {
 
     ngOnInit() {
         // TODO errorhandling
-        this.stateService.getPaths(this.name)
-            .subscribe(data => {
+        this.stateService.getPaths(this.name).subscribe(
+            data => {
                 this.initial = data[0];
                 this.squareSVG = data[1]['squareSVG'];
                 this.cssPolygons = data[1]['cssPolygons'].map(el => `polygon(${el})`
                 );
             },
-                (error) => {
-                    this.logger.log('error', error, 'StateComponent @ngOnInit')
-                });
+            (error) => {
+                this.logger.log('error', error, 'StateComponent @ngOnInit')
+            });
     }
 
     select(): void {
