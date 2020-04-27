@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { MapService } from '../services/map.service';
 import { CovidService } from '../services/covid.service';
 import { LoggerService } from '../services/logger.service';
+import { ColorService } from '../services/color.service';
 
 class apiData {
     constructor(
@@ -56,7 +57,8 @@ export class MapComponent implements OnInit {
 
     constructor(private mapService: MapService,
         private covidService: CovidService,
-        private logger: LoggerService) { }
+        private logger: LoggerService,
+        private color: ColorService) { }
 
     ngOnInit() {
         this.getAllStates();
@@ -118,31 +120,29 @@ export class MapComponent implements OnInit {
         if (this.states.has(state)) { this.states.get(state).selected = !this.states.get(state).selected; }
     }
 
-    getThemeColor(varName: string): string {
-        return getComputedStyle(document.documentElement).getPropertyValue(varName);
-    }
+
 
     displayCOVID(timeFrame: string | string[], status?: string): void {
         let color: string;
         switch (status) {
             case 'positive': {
-                color = this.getThemeColor('--bright-yellow');
+                color = this.color.hex('--bright-yellow');
                 break;
             }
             case 'negative': {
-                color = this.getThemeColor('--electron-blue');
+                color = this.color.hex('--electron-blue');
                 break;
             }
             case 'recovered': {
-                color = this.getThemeColor('--mint-leaf');
+                color = this.color.hex('--mint-leaf');
                 break;
             }
             case 'death': {
-                color = this.getThemeColor('--chi-gong');
+                color = this.color.hex('--chi-gong');
                 break;
             }
             default: {
-                color = this.getThemeColor('--chi-gong');
+                color = this.color.hex('--chi-gong');
                 break;
             }
 
