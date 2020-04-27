@@ -56,7 +56,10 @@ export class MapComponent implements OnInit {
     constructor(private mapService: MapService, private covidService: CovidService) { }
 
     ngOnInit() {
-        // TODO move error handling to a logger
+        this.getAllStates();
+    }
+
+    getAllStates() {
         this.mapService.getAllStates().subscribe(
             payload => {
                 Object.keys(payload).forEach(el => {
@@ -64,8 +67,7 @@ export class MapComponent implements OnInit {
                 })
             },
             error => {
-                alert("couldn't get map data! :(");
-                console.log(`mapService error: ${error}`)
+                this.logger('error', "couldn't get maps!", this.getAllStates)
             },
             () => this.getCOVID('now'));
     }
