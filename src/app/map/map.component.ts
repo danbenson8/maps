@@ -75,12 +75,16 @@ export class MapComponent implements OnInit {
             this.covidService.getCurrent().subscribe(
                 payload => {
                     Object.values(payload).forEach((state: object) => {
+                        let stateName: string;
+                        let statePayload: apiData;
                         try {
-                            let stateName: string = this.states.get(state['state']).name;
-                            let statePayload = new apiData(...Object.values(state));
-                            this.updateState(state['state'], new State(stateName, false, statePayload))
+                            stateName = this.states.get(state['state']).name;
                         } catch (error) {
-                            this.logger(`catch error: ${error}`, this.getCOVID)
+                            this.logger('error', `state: ${state['state']} not available`, this.getCOVID, ['now']);
+                        }
+                        if (stateName) {
+                            statePayload = new apiData(...Object.values(state));
+                            this.updateState(state['state'], new State(stateName, false, statePayload));
                         }
                     });
                 },
@@ -99,15 +103,26 @@ export class MapComponent implements OnInit {
             return true;
         } catch (error) {
             if (logError) {
-                this.logger(`error updating state: ${state} w/ info: ${info}`, this.updateState, [state])
+                this.logger('error', `error updating state: ${state} w/ info: ${info}`, this.updateState, [state])
             }
             return false;
         }
     }
 
-    logger(message: string, where: Function, parameters?: any[]) {
+    logger(type: string, message: string, where?: Function, parameters?: any[]) {
         // TODO add a message log
-        console.log(`${where.name}${(parameters) ? ` w/ parameters: ${parameters}` : ''}: ${message}`);
+        switch (type) {
+            case 'error': {
+                console.log(`${where.name}${(parameters) ? `(${parameters})` : ''}: ${message}`);
+                break;
+            }
+            case 'log': {
+                break;
+            }
+            default: {
+                break;
+            }
+        }
     }
 
     select(event: MouseEvent) {
