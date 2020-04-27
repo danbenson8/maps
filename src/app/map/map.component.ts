@@ -5,7 +5,6 @@ import { LoggerService } from '../services/logger.service';
 import { ColorService } from '../services/color.service';
 import { ApiData } from '../classes/apiData';
 import { State } from '../classes/State';
-import { StateService } from '../services/state.service';
 
 @Component({
     selector: 'app-map',
@@ -15,9 +14,9 @@ import { StateService } from '../services/state.service';
 export class MapComponent implements OnInit {
 
     states: Map<any, State> = new Map();
+    loaded: Promise<boolean>;
 
     constructor(
-        private stateService: StateService,
         private mapService: MapService,
         private covidService: CovidService,
         private logger: LoggerService,
@@ -79,10 +78,15 @@ export class MapComponent implements OnInit {
 
     select(event: MouseEvent) {
         let state = event.target['title'];
-        if (this.states.has(state)) { this.states.get(state).selected = !this.states.get(state).selected; }
+        console.log(state);
+        if (this.states.has(state)) {
+            this.states.get(state).selected = !this.states.get(state).selected;
+            console.log('here');
+        }
     }
 
     displayCOVID(timeFrame: string | string[], status: string = 'recovered'): void {
+        this.loaded = Promise.resolve(true);
         let valueByState: object = {};
         let colorByState: object = {};
         if (timeFrame = 'now') {
@@ -92,11 +96,7 @@ export class MapComponent implements OnInit {
                 }
             }
             colorByState = this.color.proportionOfTotal(valueByState, 'recovered');
-        }
-        // TODO push color to background-color of state
-        //console.log(colorByState);
-        for (let state of this.states) {
-            console.log(state);
+            Object.keys(colorByState).forEach(key => this.states.get(key).style['background-color'] = colorByState[key]);
         }
     }
 }

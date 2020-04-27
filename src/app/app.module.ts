@@ -41,7 +41,8 @@ import { ColorService } from './services/color.service';
         StateService,
         LoggerService,
         ColorService,
-        Map
+        Map,
+        StateComponent,
     ],
     bootstrap: [
         AppComponent

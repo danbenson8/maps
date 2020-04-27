@@ -1,1 +1,4 @@
-<app-state *ngFor="let state of states | keyvalue" name="{{state.value.name}}" (click)="select($event)"></app-state>
+<div *ngIf="loaded">
+    <app-state *ngFor="let state of states | keyvalue" [STATE]="state.value" (click)="select($event)">
+    </app-state>
+</div>
