@@ -80,7 +80,7 @@ export class MapComponent implements OnInit {
                         try {
                             stateName = this.states.get(state['state']).name;
                         } catch (error) {
-                            this.logger('error', `state: ${state['state']} not available`, this.getCOVID, ['now']);
+                            this.logger('ignore', `state: ${state['state']} not available`, this.getCOVID, ['now']);
                         }
                         if (stateName) {
                             statePayload = new apiData(...Object.values(state));
@@ -116,7 +116,13 @@ export class MapComponent implements OnInit {
                 console.log(`${where.name}${(parameters) ? `(${parameters})` : ''}: ${message}`);
                 break;
             }
+            case 'request': {
+                break;
+            }
             case 'log': {
+                break;
+            }
+            case 'ignore': {
                 break;
             }
             default: {
