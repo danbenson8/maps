@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { StateService } from '../state.service';
+import { StateService } from '../services/state.service';
 import { Observable } from 'rxjs';
 
 @Component({

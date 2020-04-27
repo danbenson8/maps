@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener, Input } from '@angular/core';
-import { MapService } from '../map.service';
-import { CovidService } from '../covid.service';
-import { LoggerService } from '../logger.service';
+import { MapService } from '../services/map.service';
+import { CovidService } from '../services/covid.service';
+import { LoggerService } from '../services/logger.service';
 
 class apiData {
     constructor(
