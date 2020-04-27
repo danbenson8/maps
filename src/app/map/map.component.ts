@@ -34,7 +34,7 @@ export class MapComponent implements OnInit {
             error => {
                 this.logger.log('error', error)
             },
-            () => this.getCOVID('now'));
+            () => this.displayCOVID('now'));
     }
 
     getCOVID(timeFrame: string | string[]): void {
@@ -80,37 +80,7 @@ export class MapComponent implements OnInit {
         if (this.states.has(state)) { this.states.get(state).selected = !this.states.get(state).selected; }
     }
 
-
-
     displayCOVID(timeFrame: string | string[], status?: string): void {
-        let color: string;
-        switch (status) {
-            case 'positive': {
-                color = this.color.hex('--bright-yellow');
-                break;
-            }
-            case 'negative': {
-                color = this.color.hex('--electron-blue');
-                break;
-            }
-            case 'recovered': {
-                color = this.color.hex('--mint-leaf');
-                break;
-            }
-            case 'death': {
-                color = this.color.hex('--chi-gong');
-                break;
-            }
-            default: {
-                color = this.color.hex('--chi-gong');
-                break;
-            }
-
-        }
-
-        if (timeFrame == 'now') {
-            console.log(color);
-        }
-
+        this.color.proportionOfTotal({ 'AK': 100, 'HI': 12, 'CT': 42 }, 'recovered');
     }
 }

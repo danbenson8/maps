@@ -15,6 +15,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { LoggerService } from './services/logger.service';
+import { ColorService } from './services/color.service';
 
 @NgModule({
     declarations: [
@@ -36,7 +38,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ],
     providers: [
         MapService,
-        StateService
+        StateService,
+        LoggerService,
+        ColorService,
+        Map
     ],
     bootstrap: [
         AppComponent
