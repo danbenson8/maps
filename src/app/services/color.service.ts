@@ -32,14 +32,12 @@ export class ColorService {
             }
             for (let key in valueByState) {
                 let value: number = valueByState[key];
-                console.log(this.calculateColor(value, maxValue, refHex));
                 ColorByState[key] = this.calculateColor(value, maxValue, refHex);
             }
 
         } catch (error) {
             this.logger.log('error', error, 'ColorService@proportionOfTotal');
         }
-        console.log(ColorByState);
         return ColorByState;
     }
 
@@ -48,13 +46,17 @@ export class ColorService {
     }
 
     rgbToHex(rgb: number[]): string {
-        let hex: string[] = rgb.map(el => Math.round(el).toString(16));
+        let hex: string[] = rgb.map(el => {
+            let h = Math.round(el).toString(16);
+            return (h.length) == 1 ? "0" + h : h;
+        });
         return `#${hex.join('')}`;
     }
 
     calculateColor(value: number, refValue: number, refColor: string | number[]): string {
         let prop: number = value / refValue;
-        let rgb = (typeof refColor == 'string') ? this.hexToRgb(refColor).map(el => el * prop) : refColor.map(el => el * prop);
+        // TODO goes from white to color, want from --city-lights to color
+        let rgb = (typeof refColor == 'string') ? this.hexToRgb(refColor).map(el => 255 - el * prop) : refColor.map(el => 255 - el * prop);
         return this.rgbToHex(rgb);
     }
 }

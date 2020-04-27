@@ -13,7 +13,7 @@ import { State } from '../classes/State';
 })
 export class MapComponent implements OnInit {
 
-    states = new Map();
+    states: Map<any, State> = new Map();
 
     constructor(private mapService: MapService,
         private covidService: CovidService,
@@ -34,7 +34,7 @@ export class MapComponent implements OnInit {
             error => {
                 this.logger.log('error', error)
             },
-            () => this.displayCOVID('now'));
+            () => this.getCOVID('now'));
     }
 
     getCOVID(timeFrame: string | string[]): void {
@@ -65,7 +65,7 @@ export class MapComponent implements OnInit {
 
     updateState(state: string, info: any, logError: boolean = false): boolean {
         try {
-            this.states.set(state['state'], info);
+            this.states.set(state, info);
             return true;
         } catch (error) {
             if (logError) {
@@ -80,7 +80,18 @@ export class MapComponent implements OnInit {
         if (this.states.has(state)) { this.states.get(state).selected = !this.states.get(state).selected; }
     }
 
-    displayCOVID(timeFrame: string | string[], status?: string): void {
-        this.color.proportionOfTotal({ 'AK': 100, 'HI': 12, 'CT': 42 }, 'recovered');
+    displayCOVID(timeFrame: string | string[], status: string = 'recovered'): void {
+        let valueByState: object = {};
+        let colorByState: object = {};
+        if (timeFrame = 'now') {
+            for (const [key, value] of this.states) {
+                if (key) {
+                    valueByState[key] = value.data[status];
+                }
+            }
+            colorByState = this.color.proportionOfTotal(valueByState, 'recovered');
+        }
+        // TODO push color to background-color of state
+        console.log(colorByState);
     }
 }
