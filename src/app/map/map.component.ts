@@ -118,27 +118,31 @@ export class MapComponent implements OnInit {
         if (this.states.has(state)) { this.states.get(state).selected = !this.states.get(state).selected; }
     }
 
+    getThemeColor(varName: string): string {
+        return getComputedStyle(document.documentElement).getPropertyValue(varName);
+    }
+
     displayCOVID(timeFrame: string | string[], status?: string): void {
         let color: string;
         switch (status) {
             case 'positive': {
-                color = 'var(--bright-yellow)';
+                color = this.getThemeColor('--bright-yellow');
                 break;
             }
             case 'negative': {
-                color = 'var(--electron-blue)';
+                color = this.getThemeColor('--electron-blue');
                 break;
             }
             case 'recovered': {
-                color = 'var(--mint-leaf)';
+                color = this.getThemeColor('--mint-leaf');
                 break;
             }
             case 'death': {
-                color = 'var(--chi-gong)';
+                color = this.getThemeColor('--chi-gong');
                 break;
             }
             default: {
-                color = 'var(--chi-gong)';
+                color = this.getThemeColor('--chi-gong');
                 break;
             }
 
