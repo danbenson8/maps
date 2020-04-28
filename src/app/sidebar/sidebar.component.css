@@ -27,10 +27,7 @@
     position: relative;
     width: fit-content;
     font-size: 14pt;
-}
-
-.expansion-panel button {
-    margin: 0.4em;
+    padding: 0;
 }
 
 .positive {
@@ -47,4 +44,17 @@
 
 .death {
     background-color: var(--chi-gong);
+}
+
+.grid-4-4 {
+    display: grid;
+    margin-top: 16px;
+    grid-template-columns: 80px 80px;
+    grid-template-rows: 50px 50px;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.grid-4-4 button {
+    padding: 0;
 }

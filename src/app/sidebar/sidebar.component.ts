@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { MapService } from '../services/map.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -14,7 +15,11 @@ export class SidebarComponent implements OnInit {
         this.sidenav.close();
     }
 
-    constructor() { }
+    changeStatus(status) {
+        this.mapService.status(status);
+    }
+
+    constructor(private mapService: MapService) { }
 
     ngOnInit() {
     }
