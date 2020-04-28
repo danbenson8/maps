@@ -23,12 +23,16 @@
     margin: 10vh 5vw;
 }
 
+.simplebar-vertical .simplebar-scrollbar:before {
+    background: #55efc4;
+}
+
 .datetime {
     position: absolute;
-    width: 10vw;
-    height: 3vh;
-    bottom: 4vh;
-    right: 1vw;
+    width: auto;
+    height: auto;
+    bottom: 1em;
+    right: 1em;
     margin: 0;
     padding: 0;
 }

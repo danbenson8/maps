@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MapService } from '../services/map.service';
+import { ColorService } from '../services/color.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -14,16 +15,27 @@ export class SidebarComponent implements OnInit {
 
     }
     datetime: Date = new Date();
+    currentColor: string;
 
     close() {
         this.sidenav.close();
     }
 
-    changeStatus(status) {
-        this.mapService.status(status);
+    scroll(event) {
+        console.log(event);
     }
 
-    constructor(private mapService: MapService) { }
+    changeStatus(status) {
+        this.currentColor = this.color.getTheme(status);
+        this.mapService.status(status);
+        let sheet = document.createElement('style')
+        sheet.innerHTML = `.simplebar-track.simplebar-vertical .simplebar-scrollbar:before {background: var(${this.currentColor});}`;
+        document.body.appendChild(sheet);
+    }
+
+    constructor(private mapService: MapService, private color: ColorService) {
+        this.changeStatus('recovered')
+    }
 
     ngOnInit() {
     }

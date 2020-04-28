@@ -8,7 +8,13 @@ import { MapService } from '../services/map.service';
 })
 export class TimelineComponent implements OnInit {
 
-    numbers: string[] = Array.from({ length: 100 }).map((_, i) => `Item #${i}`);
+    date: Date = new Date('2019-01-23');
+    addDays(date, days) {
+        const copy = new Date(Number(date))
+        copy.setDate(date.getDate() + days)
+        return copy
+    }
+    numbers: Date[] = Array.from({ length: 100 }).map((_, i) => this.addDays(this.date, i));
 
     constructor(private mapService: MapService) { }
 

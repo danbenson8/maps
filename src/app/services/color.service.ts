@@ -14,6 +14,10 @@ export class ColorService {
         this.theme.set('base', '--city-lights')
     }
 
+    getTheme(status: string) {
+        return this.theme.get(status);
+    }
+
     hex(varName: string): string {
         return getComputedStyle(document.documentElement).getPropertyValue(varName);
     }
