@@ -14,11 +14,37 @@
     justify-content: center;
 }
 
-button {
+.menu-button {
     position: absolute;
     top: 0.4em;
     left: 0.4em;
     margin: 0;
     font-family: 'Material Icons';
     font-size: 50px;
+}
+
+.expansion-panel {
+    position: relative;
+    width: fit-content;
+    font-size: 14pt;
+}
+
+.expansion-panel button {
+    margin: 0.4em;
+}
+
+.positive {
+    background-color: var(--bright-yarrow);
+}
+
+.negative {
+    background-color: var(--electron-blue);
+}
+
+.recovered {
+    background-color: var(--mint-leaf);
+}
+
+.death {
+    background-color: var(--chi-gong);
 }

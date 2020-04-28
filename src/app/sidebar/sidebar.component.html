@@ -1,19 +1,22 @@
 <mat-sidenav-container class="example-container" (backdropClick)="close()">
     <mat-sidenav #sidenav mode="over" (keydown.escape)="close()" disableClose>
-        <mat-expansion-panel>
+        <mat-expansion-panel class="expansion-panel">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    TITLE
+                    COVID ....................................................
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <p>CONTENT</p>
+            <button mat-flat-button id="positive" class="positive">positive</button>
+            <button mat-flat-button id="negative" class="negative">negative</button>
+            <button mat-flat-button id="recovered" class="recovered">recovered</button>
+            <button mat-flat-button id="death" class="death">death</button>
 
         </mat-expansion-panel>
     </mat-sidenav>
 
     <mat-sidenav-content (keydown.escape)="sidenav.open()">
-        <button mat-icon-button (click)="sidenav.open()">menu</button>
+        <button mat-icon-button (click)="sidenav.open()" class="menu-button">menu</button>
         <div class="map">
             <app-map></app-map>
         </div>
