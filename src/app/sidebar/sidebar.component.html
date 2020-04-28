@@ -1,5 +1,5 @@
 <mat-sidenav-container class="example-container" (backdropClick)="close()">
-    <mat-sidenav #sidenav mode="push" (keydown.escape)="close()" disableClose>
+    <mat-sidenav #sidenav mode="over" (keydown.escape)="close()" disableClose>
         <mat-expansion-panel class="expansion-panel">
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -21,6 +21,9 @@
 
     <mat-sidenav-content (keydown.escape)="sidenav.open()">
         <button mat-icon-button (click)="sidenav.open()" class="menu-button">menu</button>
+        <div class="timeline">
+            <app-timeline></app-timeline>
+        </div>
         <div class="map">
             <app-map></app-map>
         </div>
