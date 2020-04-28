@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { MapService } from '../services/map.service';
 
 @Component({
-  selector: 'app-timeline',
-  templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.css']
+    selector: 'app-timeline',
+    templateUrl: './timeline.component.html',
+    styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
 
-  constructor() { }
+    numbers: string[] = Array.from({ length: 100 }).map((_, i) => `Item #${i}`);
 
-  ngOnInit() {
-  }
+    constructor(private mapService: MapService) { }
+
+    ngOnInit() {
+    }
 
 }

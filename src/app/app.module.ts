@@ -18,36 +18,38 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { LoggerService } from './services/logger.service';
 import { ColorService } from './services/color.service';
 import { TimelineComponent } from './timeline/timeline.component';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      StateComponent,
-      MapComponent,
-      SafePipe,
-      SidebarComponent,
-      TimelineComponent
-   ],
-   imports: [
-      BrowserModule,
-      HttpClientModule,
-      BrowserAnimationsModule,
-      DragDropModule,
-      MatSidenavModule,
-      MatButtonModule,
-      MatIconModule,
-      MatExpansionModule
-   ],
-   providers: [
-      MapService,
-      StateService,
-      LoggerService,
-      ColorService,
-      Map,
-      StateComponent
-   ],
-   bootstrap: [
-      AppComponent
-   ]
+    declarations: [
+        AppComponent,
+        StateComponent,
+        MapComponent,
+        SafePipe,
+        SidebarComponent,
+        TimelineComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        DragDropModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatExpansionModule,
+        SimplebarAngularModule
+    ],
+    providers: [
+        MapService,
+        StateService,
+        LoggerService,
+        ColorService,
+        Map,
+        StateComponent
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule { }

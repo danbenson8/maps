@@ -10,6 +10,10 @@ import { MapService } from '../services/map.service';
 export class SidebarComponent implements OnInit {
 
     @ViewChild('sidenav') sidenav: MatSidenav;
+    options: object = {
+
+    }
+    datetime: Date = new Date();
 
     close() {
         this.sidenav.close();
