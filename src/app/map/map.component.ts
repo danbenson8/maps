@@ -95,7 +95,7 @@ export class MapComponent implements OnInit {
                     valueByState[key] = value.data[status];
                 }
             }
-            colorByState = this.color.proportionOfTotal(valueByState, 'recovered');
+            colorByState = this.color.proportionOfTotal(valueByState, status);
             Object.keys(colorByState).forEach(key => this.states.get(key).style['background-color'] = colorByState[key]);
         }
     }

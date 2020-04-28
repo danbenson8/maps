@@ -7,10 +7,11 @@ import { LoggerService } from './logger.service';
 export class ColorService {
 
     constructor(private theme: Map<string, string>, private logger: LoggerService) {
-        this.theme.set('positive', '--bright-yellow');
+        this.theme.set('positive', '--bright-yarrow');
         this.theme.set('negative', '--electron-blue');
         this.theme.set('recovered', '--mint-leaf');
         this.theme.set('death', '--chi-gong');
+        this.theme.set('base', '--city-lights')
     }
 
     hex(varName: string): string {
@@ -19,20 +20,24 @@ export class ColorService {
 
     proportionOfTotal(valueByState: object, type: string): object {
         let ColorByState: object = {};
-        let refHex: string;
+        let minHex: string;
+        let maxHex: string;
         let maxValue: number;
+        let minValue: number;
         let sum: number = 0;
         try {
-            refHex = this.hex(this.theme.get(type));
+            minHex = this.hex(this.theme.get('base'));
+            maxHex = this.hex(this.theme.get(type));
             // TODO check doing this in arrays isn't faster?
             for (let key in valueByState) {
                 let value: number = valueByState[key];
                 maxValue = (maxValue > valueByState[key]) ? maxValue : valueByState[key];
+                minValue = (minValue < valueByState[key]) ? minValue : valueByState[key];
                 sum += value;
             }
             for (let key in valueByState) {
                 let value: number = valueByState[key];
-                ColorByState[key] = this.calculateColor(value, maxValue, refHex);
+                ColorByState[key] = this.calculateColor(value, minValue, maxValue, minHex, maxHex);
             }
 
         } catch (error) {
@@ -53,10 +58,14 @@ export class ColorService {
         return `#${hex.join('')}`;
     }
 
-    calculateColor(value: number, refValue: number, refColor: string | number[]): string {
-        let prop: number = value / refValue;
-        // TODO goes from white to color, want from --city-lights to color
-        let rgb = (typeof refColor == 'string') ? this.hexToRgb(refColor).map(el => 255 - el * prop) : refColor.map(el => 255 - el * prop);
-        return this.rgbToHex(rgb);
+    calculateColor(value: number, minValue: number, maxValue: number, minColor: string | number[], maxColor: string | number[]): string {
+        let x: number = (value - minValue) / (maxValue - minValue);
+        let minRGB: number[] = (typeof minColor === 'string') ? this.hexToRgb(minColor) : minColor;
+        let maxRGB: number[] = (typeof maxColor === 'string') ? this.hexToRgb(maxColor) : maxColor;
+        let thisRGB: number[] = [];
+        for (let i = 0; i < 3; i++) {
+            thisRGB.push((1 - x) * minRGB[i] + x * maxRGB[i]);
+        }
+        return this.rgbToHex(thisRGB);
     }
 }
