@@ -19,7 +19,7 @@ export class CovidService {
     constructor(private http: HttpClient) { }
 
     getHistorical() {
-        this.historicalUrl = this.baseUrl + 'states/daily.json'
+        this.historicalUrl = 'https://covidtracking.com/api/states/daily'
         return this.http.get(this.historicalUrl, this.requestOptions);
     }
 
