@@ -1,3 +1,10 @@
+app-timeline {
+    position: absolute;
+    width: 20vw;
+    height: 80vh;
+    margin: 10vh 5vw;
+}
+
 .example-container {
     position: absolute;
     top: 0;
@@ -14,17 +21,6 @@
     justify-content: center;
     transform: translateX(25vw);
     overflow-x: hidden;
-}
-
-.timeline {
-    position: absolute;
-    width: 20vw;
-    height: 80vh;
-    margin: 10vh 5vw;
-}
-
-.simplebar-vertical .simplebar-scrollbar:before {
-    background: #55efc4;
 }
 
 .datetime {

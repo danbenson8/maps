@@ -1,0 +1,16 @@
+:root {
+    overflow-y: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline__data {
+    display: block;
+}
+
+.timeline__slider {
+    margin-left: 2em;
+    height: 70vh;
+    display: block;
+}

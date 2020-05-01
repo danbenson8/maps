@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MapService } from '../services/map.service';
 
 @Component({
@@ -8,17 +8,40 @@ import { MapService } from '../services/map.service';
 })
 export class TimelineComponent implements OnInit {
 
-    date: Date = new Date('2019-01-23');
+    invert = true;
+    max: number;
+    min: number = 0;
+    showTicks = true;
+    step = 1;
+    vertical = true;
+
+    @Output() viewDate = new EventEmitter<Date>();
+    dateRange: Date[];
+    firstCase: Date = new Date('2020-01-22, 00:00:00 -0500');
+    today: Date = new Date();
+
+    constructor(private mapService: MapService) { }
+
+    ngOnInit() {
+        this.initDates();
+    }
+
+    initDates() {
+        // TODO improve robustness
+        let daysSinceFirstCase = Math.floor((this.today.getTime() - this.firstCase.getTime()) / 86400000);
+        this.max = daysSinceFirstCase - 1;
+        this.dateRange = Array.from({ length: daysSinceFirstCase }).map((_, i) => this.addDays(this.firstCase, i));
+    }
+
     addDays(date, days) {
         const copy = new Date(Number(date))
         copy.setDate(date.getDate() + days)
         return copy
     }
-    numbers: Date[] = Array.from({ length: 100 }).map((_, i) => this.addDays(this.date, i));
 
-    constructor(private mapService: MapService) { }
-
-    ngOnInit() {
+    setDate(event) {
+        let day = this.dateRange[event.value];
+        this.viewDate.emit(day);
     }
 
 }

@@ -17,27 +17,29 @@ export class SidebarComponent implements OnInit {
     datetime: Date = new Date();
     currentColor: string;
 
-    close() {
-        this.sidenav.close();
-    }
-
-    scroll(event) {
-        console.log(event);
-    }
-
-    changeStatus(status) {
-        this.currentColor = this.color.getTheme(status);
-        this.mapService.status(status);
-        let sheet = document.createElement('style')
-        sheet.innerHTML = `.simplebar-track.simplebar-vertical .simplebar-scrollbar:before {background: var(${this.currentColor});}`;
-        document.body.appendChild(sheet);
-    }
-
     constructor(private mapService: MapService, private color: ColorService) {
         this.changeStatus('recovered')
     }
 
     ngOnInit() {
+    }
+
+    close() {
+        this.sidenav.close();
+    }
+
+    changeStatus(status) {
+        this.currentColor = this.color.getTheme(status);
+        this.mapService.status(status);
+
+        // TODO change slider color instead
+        let sheet = document.createElement('style')
+        sheet.innerHTML = `.simplebar-track.simplebar-vertical .simplebar-scrollbar:before {background: var(${this.currentColor});}`;
+        document.body.appendChild(sheet);
+    }
+
+    setDate(day: Date) {
+        this.datetime = day;
     }
 
 }

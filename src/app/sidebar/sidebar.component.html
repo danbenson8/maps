@@ -21,9 +21,7 @@
 
     <mat-sidenav-content (keydown.escape)="sidenav.open()">
         <button mat-icon-button (click)="sidenav.open()" class="menu-button">menu</button>
-        <ngx-simplebar [options]="options" class="timeline" (scroll)="scroll($event)">
-            <app-timeline></app-timeline>
-        </ngx-simplebar>
+        <app-timeline (viewDate)="setDate($event)"></app-timeline>
         <div class="map">
             <app-map></app-map>
         </div>

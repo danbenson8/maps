@@ -18,8 +18,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { LoggerService } from './services/logger.service';
 import { ColorService } from './services/color.service';
 import { TimelineComponent } from './timeline/timeline.component';
-import { SimplebarAngularModule } from 'simplebar-angular';
-
+import { MatSliderModule } from '@angular/material/slider';
 @NgModule({
     declarations: [
         AppComponent,
@@ -38,7 +37,7 @@ import { SimplebarAngularModule } from 'simplebar-angular';
         MatButtonModule,
         MatIconModule,
         MatExpansionModule,
-        SimplebarAngularModule
+        MatSliderModule
     ],
     providers: [
         MapService,
