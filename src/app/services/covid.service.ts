@@ -11,7 +11,7 @@ export class CovidService {
         redirect: 'follow'
     };
 
-    baseUrl: string = 'https://covidtracking.com/api/';
+    baseUrl: string = 'https://cors-anywhere.herokuapp.com/https://covidtracking.com/api/';
     currentUrl: string;
     historicalUrl: string;
 
