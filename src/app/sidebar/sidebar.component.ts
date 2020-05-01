@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
     options: object = {
 
     }
-    datetime: Date = new Date();
+    datetime: Date;
     currentColor: string;
 
     constructor(private mapService: MapService, private color: ColorService) {
