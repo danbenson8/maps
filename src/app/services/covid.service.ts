@@ -11,7 +11,7 @@ export class CovidService {
         redirect: 'follow'
     };
 
-    baseUrl: string = 'https://cors-anywhere.herokuapp.com/https://covidtracking.com/api/';
+    baseUrl: string = 'https://covidtracking.com/api/v1/';
     currentUrl: string;
     historicalUrl: string;
 
@@ -19,12 +19,12 @@ export class CovidService {
     constructor(private http: HttpClient) { }
 
     getHistorical() {
-        this.historicalUrl = this.baseUrl + 'states/daily'
+        this.historicalUrl = this.baseUrl + 'states/daily.json'
         return this.http.get(this.historicalUrl, this.requestOptions);
     }
 
     getCurrent() {
-        this.currentUrl = this.baseUrl + 'states'
+        this.currentUrl = this.baseUrl + 'states/current.json'
         return this.http.get(this.currentUrl, this.requestOptions);
     }
 
