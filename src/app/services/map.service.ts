@@ -16,6 +16,7 @@ export class MapService {
 
     dbUrl: string = 'http://localhost:3000/db';
     states: Map<string, State> = new Map();
+    historicalRequested: boolean = false;
 
     constructor(private http: HttpClient,
         private logger: LoggerService,
@@ -44,13 +45,13 @@ export class MapService {
         );
     }
 
-    setCOVID(timeFrame: string | string[]): void {
+    setCOVID(timeFrame: string | string[], override?: boolean): void {
         if (timeFrame == 'now') {
             this.covid.getCurrent().subscribe(
                 payload => {
                     Object.values(payload).forEach((state: object) => {
                         try {
-                            let statePayload: ApiData = new ApiData(...Object.values(state));
+                            let statePayload: ApiData = new ApiData(state);
                             let cur: State = this.states.get(state['state'])
                             cur.data = statePayload;
                             this.updateState(state['state'], cur);
@@ -63,6 +64,24 @@ export class MapService {
                     this.logger.log('error', error, "couldn't reach api :(")
                 },
                 () => this.status()
+            );
+        } else if (timeFrame == 'historical' && !this.historicalRequested && !override) {
+            this.historicalRequested = true;
+            this.covid.getHistorical().subscribe(
+                payload => {
+                    Object.values(payload).forEach((entry: object) => {
+                        try {
+                            //let date: string = entry['date'].toString();
+                            //let state: string = entry['state'];
+                            //let formatDate: Date = new Date([date.slice(0, 4), date.slice(4, 6), date.slice(6)].join('-'));
+                            console.log(new ApiData(entry));
+
+                        } catch (error) {
+                            console.log(error);
+                            //this.logger.log('ignore', error, `state: ${state['state']} not available`);
+                        }
+                    });
+                },
             );
         }
     }

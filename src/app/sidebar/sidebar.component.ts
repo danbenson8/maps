@@ -40,6 +40,7 @@ export class SidebarComponent implements OnInit {
 
     setDate(day: Date) {
         this.datetime = day;
+        this.mapService.setCOVID('historical');
     }
 
 }
